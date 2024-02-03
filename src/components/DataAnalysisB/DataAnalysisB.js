@@ -21,32 +21,39 @@ const DataAnalysisB = ({
 
   return (
     <div
-      className={styles.mainWrapper}
+      className="min-h-screen flex items-center justify-center"
       style={{
         "--idBackground": idBackground,
         "--idColor": idColor,
+        "--stepsColor": stepsColor,
+        "--stepsContainerBorder": stepsContainerBorder,
       }}
     >
-      <div className={styles.container}>
-        <div className={styles.wrapper}>
+      <div className="flex flex-col gap-[10px] max-w-[95%] mx-[auto] my-[0]">
+        <div className="flex justify-center w-full gap-[20px]">
           {data.map((el, i) => (
             <React.Fragment key={i}>
               <div
-                className={styles.box}
+                className="flex items-center flex-col gap-[15px] bg-[var(--background)] rounded-[10px] p-[12px] w-full h-auto px-[24px] py-[30px] min-h-full flex-[1]"
                 style={{
                   "--background": el.background,
                 }}
                 ref={i === 0 ? firstBoxRef : null}
               >
-                <div className={styles.icon}>{el.icon}</div>
-                <p className={styles.title} style={{ color: el.titleColor }}>
+                <div className="max-w-[55px]">{el.icon}</div>
+                <p
+                  className="text-center text-[18px] not-italic font-medium leading-[133.333%] mt-auto"
+                  style={{ color: el.titleColor }}
+                >
                   {el.title}
                 </p>
               </div>
               {data.length !== i + 1 && (
-                <div className={styles.idContainer}>
-                  <p className={styles.id}>{i + 1}</p>
-                  <div className={styles.arrow}>{arrow}</div>
+                <div className="max-w-[152px] w-full flex flex-col justify-center items-center gap-[5px] flex-[1] mx-[0] my-[auto]">
+                  <p className="w-[45px] h-[45px] text-[16px] font-bold rounded-[50%] text-[var(--idColor)] bg-[var(--idBackground)] flex justify-center items-center mx-[auto] my-[0]">
+                    {i + 1}
+                  </p>
+                  <div className="max-w-[130px] min-w-[90px]">{arrow}</div>
                 </div>
               )}
             </React.Fragment>
@@ -57,25 +64,31 @@ const DataAnalysisB = ({
             width: `calc(100% - ${boxWidth}px)`,
             "--directionArrowColor": directionArrowColor,
           }}
-          className={[styles.directionArrow].join(" ")}
+          className="w-[calc(100% - var(--maxWidth))] mx-[auto] my-[0] rounded-[30px] rounded-tl-none rounded-tr-none border-[2px]  border-[var(--directionArrowColor)] border-t-0 h-[100px] flex flex-col justify-end relative mt-[20px] pb-2"
         >
-          <div className={styles.angleUp}>
-            <i className="fa-solid fa-angle-up"></i>
+          <div className="absolute left-[0]  translate-x-[calc(-50%-1.5px)] translate-y-[_calc(-50%+2px)] top-[0] text-[20px]">
+            <i className="fa-solid fa-angle-up text-[var(--directionArrowColor)]"></i>
           </div>
-          <p className={styles.id}>{data.length}</p>
+          <p
+            className="w-[45px] h-[45px] text-[16px] font-bold rounded-[50%] 
+          text-[var(--idColor)] bg-[var(--idBackground)] flex justify-center items-center mx-[auto] my-[0]"
+          >
+            {data.length}
+          </p>
         </div>
 
         <div
-          className={styles.stepsContainer}
-          style={{
-            "--stepsColor": stepsColor,
-            "--stepsContainerBorder": stepsContainerBorder,
-          }}
+          className="px-[10px] py-[18px] flex justify-evenly items-center rounded-[10px] mt-[70px]"
+          style={{ border: "var(--stepsContainerBorder)" }}
         >
           {steps.map((step, i) => (
-            <div className={styles.steps} key={i}>
-              <p className={styles.id}>{i + 1}</p>
-              <p className={styles.step}>{step}</p>
+            <div className="flex items-center gap-[8px]" key={i}>
+              <p className="w-[25px] h-[25px] text-[10px] font-bold rounded-[50%] text-[var(--idColor)] bg-[var(--idBackground)] flex justify-center items-center mx-[auto] my-[0]">
+                {i + 1}
+              </p>
+              <p className="text-[16px] text-[var(--stepsColor)] not-italic font-normal leading-[22px]">
+                {step}
+              </p>
             </div>
           ))}
         </div>

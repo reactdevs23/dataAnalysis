@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import styles from "./DataAnalysisA.module.css";
 
 const DataAnalysisA = ({
   data,
@@ -28,30 +27,33 @@ const DataAnalysisA = ({
   }, [data]);
 
   return (
-    <div className={styles.mainWrapper}>
-      <div className={styles.container}>
-        <div className={styles.wrapper}>
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="flex flex-col gap-[10px] max-w-[95%] mx-[auto] my-[0]">
+        <div className="flex justify-center w-full gap-[20px]">
           {data.map((el, i) => (
             <React.Fragment key={i}>
               <div
-                className={styles.box}
+                className="flex items-center flex-col gap-[15px] bg-[var(--background)] rounded-[10px] p-[12px] w-full h-auto px-[24px] py-[30px] min-h-full flex-[1]"
                 style={{
                   "--background": el.background,
                 }}
                 ref={i === 0 ? firstBoxRef : null}
               >
-                <div className={styles.icon}>{el.icon}</div>
-                <p className={styles.title} style={{ color: el.titleColor }}>
+                <div className="max-w-[55px]">{el.icon}</div>
+                <p
+                  className="text-center text-[18px] not-italic font-medium leading-[133.333%] mt-auto"
+                  style={{ color: el.titleColor }}
+                >
                   {el.title}
                 </p>
               </div>
               {data.length !== i + 1 && (
                 <div
-                  className={styles.infoContainer}
+                  className="max-w-[152px] w-full flex flex-col justify-center items-center gap-[5px] flex-[1] mx-[0] my-[auto]"
                   style={{ transform: `translateY(-${maxInfoHeight / 2}px)` }}
                 >
                   <p
-                    className={styles.info}
+                    className="text-center text-[16px] not-italic font-normal leading-[22px] min-h-[36px] flex items-end"
                     style={{
                       height: `${maxInfoHeight}px`,
                       color: el.infoColor,
@@ -60,7 +62,7 @@ const DataAnalysisA = ({
                   >
                     {el.info}
                   </p>
-                  <div className={styles.arrow}>{arrow}</div>
+                  <div className="max-w-[130px] min-w-[90px]">{arrow}</div>
                 </div>
               )}
             </React.Fragment>
@@ -71,12 +73,12 @@ const DataAnalysisA = ({
             width: `calc(100% - ${boxWidth}px)`,
             "--directionArrowColor": directionArrowColor,
           }}
-          className={[styles.directionArrow].join(" ")}
+          className="w-[calc(100% - var(--maxWidth))] mx-[auto] my-[0] rounded-[30px] rounded-tl-none rounded-tr-none border-[2px]  border-[var(--directionArrowColor)] border-t-0 h-[100px] flex flex-col justify-end relative mt-[20px]"
         >
-          <div className={styles.angleUp}>
+          <div className="absolute left-[0] translate-x-[calc(-50%-1.5px)] translate-y-[_calc(-50%+2px)] top-[0] text-[20px]">
             <i className="fa-solid fa-angle-up"></i>
           </div>
-          <p className={styles.tagline} style={{ color: taglineColor }}>
+          <p className="text-center text-[16px] not-italic font-normal leading-[125%] p-[10px]">
             {tagline}
           </p>
         </div>
