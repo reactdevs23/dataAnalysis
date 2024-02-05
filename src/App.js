@@ -12,7 +12,7 @@ function App() {
   const [dataAnalysisA, seDataAnalysisA] = useState({
     fontFamily: "'Inter', sans-serif",
     mainBg: "#fff",
-    secondaryColor: "#fff",
+    secondaryColor: "#000",
     arrow: <Arrow color="#000" />,
     directionArrowColor: "#000",
     tagline: "Informed Desicison-Making",

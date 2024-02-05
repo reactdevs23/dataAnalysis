@@ -27,7 +27,10 @@ const DataAnalysisA = ({
   }, [data]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div
+      className="min-h-screen flex items-center justify-center"
+      style={{ "--taglineColor": taglineColor }}
+    >
       <div className="flex flex-col gap-[10px] max-w-[95%] mx-[auto] my-[0]">
         <div className="flex justify-center w-full gap-[20px]">
           {data.map((el, i) => (
@@ -73,12 +76,12 @@ const DataAnalysisA = ({
             width: `calc(100% - ${boxWidth}px)`,
             "--directionArrowColor": directionArrowColor,
           }}
-          className="w-[calc(100% - var(--maxWidth))] mx-[auto] my-[0] rounded-[30px] rounded-tl-none rounded-tr-none border-[2px]  border-[var(--directionArrowColor)] border-t-0 h-[100px] flex flex-col justify-end relative mt-[20px]"
+          className="w-[calc(100% - var(--maxWidth))] mx-[auto] my-[0] rounded-[30px] rounded-tl-none rounded-tr-none border-[2px]  border-[var(--directionArrowColor)] border-t-0 h-[100px] flex flex-col justify-end relative mt-[20px] pb-2"
         >
-          <div className="absolute left-[0] translate-x-[calc(-50%-1.5px)] translate-y-[_calc(-50%+2px)] top-[0] text-[20px]">
-            <i className="fa-solid fa-angle-up"></i>
+          <div className="absolute left-[0]  translate-x-[calc(-50%-1.5px)] translate-y-[_calc(-50%+2px)] top-[0] text-[20px]">
+            <i className="fa-solid fa-angle-up text-[var(--directionArrowColor)]"></i>
           </div>
-          <p className="text-center text-[16px] not-italic font-normal leading-[125%] p-[10px]">
+          <p className="text-center text-[var(--taglineColor)] text-[16px] not-italic font-normal leading-[125%] p-[10px]">
             {tagline}
           </p>
         </div>
