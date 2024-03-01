@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 
-const DataAnalysisB = ({
+const MainComponent = ({
   data,
   arrow,
   directionArrowColor,
@@ -9,6 +9,7 @@ const DataAnalysisB = ({
   steps,
   stepsContainerBorder,
   stepsColor,
+  showLoopBack,
 }) => {
   const [boxWidth, setBoxWidth] = useState(null);
   const firstBoxRef = useRef(null);
@@ -20,12 +21,13 @@ const DataAnalysisB = ({
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center"
+      className="min-h-screen flex items-center justify-center w-full "
       style={{
         "--idBackground": idBackground,
         "--idColor": idColor,
         "--stepsColor": stepsColor,
         "--stepsContainerBorder": stepsContainerBorder,
+        background: "var(--mainBg)",
       }}
     >
       <div className="flex flex-col gap-[10px] max-w-[95%] mx-[auto] my-[0]">
@@ -58,42 +60,46 @@ const DataAnalysisB = ({
             </React.Fragment>
           ))}
         </div>
-        <div
-          style={{
-            width: `calc(100% - ${boxWidth}px)`,
-            "--directionArrowColor": directionArrowColor,
-          }}
-          className="w-[calc(100% - var(--maxWidth))] mx-[auto] my-[0] rounded-[30px] rounded-tl-none rounded-tr-none border-[2px]  border-[var(--directionArrowColor)] border-t-0 h-[100px] flex flex-col justify-end relative mt-[20px] pb-2"
-        >
-          <div className="absolute left-[0]  translate-x-[calc(-50%-1.5px)] translate-y-[_calc(-50%+2px)] top-[0] text-[20px]">
-            <i className="fa-solid fa-angle-up text-[var(--directionArrowColor)]"></i>
-          </div>
-          <p
-            className="w-[45px] h-[45px] text-[16px] font-bold rounded-[50%] 
-          text-[var(--idColor)] bg-[var(--idBackground)] flex justify-center items-center mx-[auto] my-[0]"
+        {showLoopBack && (
+          <div
+            style={{
+              width: `calc(100% - ${boxWidth}px)`,
+              "--directionArrowColor": directionArrowColor,
+            }}
+            className="w-[calc(100% - var(--maxWidth))] mx-[auto] my-[0] rounded-[30px] rounded-tl-none rounded-tr-none border-[2px]  border-[var(--directionArrowColor)] border-t-0 h-[100px] flex flex-col justify-end relative mt-[20px] pb-2"
           >
-            {data.length}
-          </p>
-        </div>
+            <div className="absolute left-[0]  translate-x-[calc(-50%-1.5px)] translate-y-[_calc(-50%+2px)] top-[0] text-[20px]">
+              <i className="fa-solid fa-angle-up text-[var(--directionArrowColor)]"></i>
+            </div>
+            <p
+              className="w-[45px] h-[45px] text-[16px] font-bold rounded-[50%] 
+          text-[var(--idColor)] bg-[var(--idBackground)] flex justify-center items-center mx-[auto] my-[0]"
+            >
+              {data.length}
+            </p>
+          </div>
+        )}
 
         <div
           className="px-[10px] py-[18px] flex justify-evenly items-center rounded-[10px] mt-[70px]"
           style={{ border: "var(--stepsContainerBorder)" }}
         >
-          {steps.map((step, i) => (
-            <div className="flex items-center gap-[8px]" key={i}>
-              <p className="w-[25px] h-[25px] text-[10px] font-bold rounded-[50%] text-[var(--idColor)] bg-[var(--idBackground)] flex justify-center items-center mx-[auto] my-[0]">
-                {i + 1}
-              </p>
-              <p className="text-[16px] text-[var(--stepsColor)] not-italic font-normal leading-[22px]">
-                {step}
-              </p>
-            </div>
-          ))}
+          {steps
+            .slice(0, showLoopBack ? data.length : data.length - 1)
+            .map((step, i) => (
+              <div className="flex items-center gap-[8px]" key={i}>
+                <p className="w-[25px] h-[25px] text-[10px] font-bold rounded-[50%] text-[var(--idColor)] bg-[var(--idBackground)] flex justify-center items-center mx-[auto] my-[0]">
+                  {i + 1}
+                </p>
+                <p className="text-[16px] text-[var(--stepsColor)] not-italic font-normal leading-[22px]">
+                  {step}
+                </p>
+              </div>
+            ))}
         </div>
       </div>
     </div>
   );
 };
 
-export default DataAnalysisB;
+export default MainComponent;
